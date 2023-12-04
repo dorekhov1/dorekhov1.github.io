@@ -12,8 +12,12 @@ export const UserTextmessage = ({ messageItem }) => {
     <div className=" flex flex-row-reverse ">
       <div className="mt-4 mb-2 flex max-w-[80%] flex-col items-end justify-end ">
         <div
-          className="items-end break-words break-all  rounded-t-[20px]  rounded-br-[5px] rounded-bl-[20px] border-[0.5px] bg-white px-[10px] py-[6px] text-sm "
-          style={{ color: textColor, backgroundColor: userMsgBackgroundColor }}
+          className="items-end break-words rounded-t-[20px]  rounded-br-[5px] rounded-bl-[20px] border-[0.5px] bg-white px-[10px] py-[6px] text-sm "
+          style={{
+            color: textColor,
+            backgroundColor: userMsgBackgroundColor,
+            maxWidth: "100%",
+          }}
         >
           <MardownText text={text} />
         </div>

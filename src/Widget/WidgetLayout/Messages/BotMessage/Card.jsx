@@ -49,33 +49,24 @@ export const Card = ({
           alt="BotAvatar"
         />
       </div>
-      <div className="flex  flex-col space-y-1">
-        <div
-          className={`ml-4 w-fit min-w-[10%] max-w-[75%] self-start whitespace-pre-line  break-words text-sm text-white`}
-        >
-          <div className="flex min-w-[10%] max-w-[90%] flex-col space-x-2">
-            <div
-              className={`w-fit text-sm ${borderStyle}      `}
-              style={{
-                color: botMsgColor,
-                backgroundColor: botMsgBackgroundColor,
-              }}
-              dir="auto"
-            >
-              <img className="rounded-t-lg" src={imageUrl} alt="imgAlt" />
 
-              <div
-                className={`w-fit text-sm ${borderStyle}  whitespace-pre-line  break-words break-all px-[15px] py-[8px]`}
-                dir="auto"
-              >
-                <MardownText text={text} />
-              </div>
-            </div>
-            {showBotAvatar && (
-              <div className="text-[10px] italic  text-gray-500">
-                {formattedTs(ts)}
-              </div>
-            )}
+      <div className="flex min-w-[10%] max-w-[80%] flex-col space-x-2">
+        <div
+          className={`w-fit text-sm ${borderStyle}      `}
+          style={{
+            color: botMsgColor,
+            backgroundColor: botMsgBackgroundColor,
+          }}
+          dir="auto"
+        >
+          <img className="rounded-t-lg" src={imageUrl} alt="imgAlt" />
+
+          <div
+            className={`w-fit text-sm ${borderStyle}  whitespace-pre-line  break-words   px-[15px] py-[8px]`}
+            style={{ maxWidth: "100%" }}
+            dir="auto"
+          >
+            <MardownText text={text} />
           </div>
         </div>
         {showBotAvatar && (
