@@ -23,7 +23,7 @@ const initialState = {
   messages: [],
   botTyping: false,
   userTyping: true,
-  userTypingPlaceholder: "Type your message here...",
+  userTypingPlaceholder: "Наберите ваше сообщение...",
   userGreeted: false,
 };
 export const messagesSlice = createSlice({
@@ -67,8 +67,8 @@ export const messagesSlice = createSlice({
     toggleBotTyping: (state, action) => {
       state.botTyping = action.payload;
       state.userTypingPlaceholder = action.payload
-        ? "Please wait for bot response..."
-        : "Type your message here...";
+        ? "Пожалуйста, подождите ответ..."
+        : "Наберите ваше сообщение...";
     },
     setUserTypingPlaceholder: (state, action) => {
       state.userTypingPlaceholder = action.payload;
@@ -81,7 +81,7 @@ export const messagesSlice = createSlice({
     builder.addCase(fetchBotResponse.fulfilled, (state, action) => {
       state.botTyping = false;
       state.userTyping = true;
-      state.userTypingPlaceholder = "Type your message here...";
+      state.userTypingPlaceholder = "Наберите ваше сообщение...";
       const messages = action.payload;
 
       // messageType: card
@@ -133,7 +133,7 @@ export const messagesSlice = createSlice({
         }
       } else {
         state.messages.push({
-          text: "Unfortunately, I'm having some problem 😅. I would appreciate it if you could try again later",
+          text: "К сожалению, у меня произошла ошибка 😅. Я буду очень рад, если вы попробуйте ещё раз чуть позже.",
           sender: "BOT",
           type: "text",
           ts: new Date(),

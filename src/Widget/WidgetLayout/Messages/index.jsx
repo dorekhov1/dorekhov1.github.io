@@ -44,7 +44,7 @@ export const Messages = () => {
   useEffect(() => {
     if (!userGreeted && messages.length < 1) {
       dispatch(setUserGreeted(true));
-      dispatch(setUserTypingPlaceholder("Please wait while bot is typing..."));
+      dispatch(setUserTypingPlaceholder("Пожалуйста, подождите ответ..."));
       dispatch(toggleBotTyping(true));
       dispatch(toggleUserTyping(false));
       dispatch(

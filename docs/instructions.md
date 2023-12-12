@@ -31,7 +31,7 @@
             metadata: {},
             botAvatar:
               "",
-            widgetColor: "#a78bfa",
+            widgetColor: "#ebbf1e",
             textColor: "#4c1d95",
             userMsgBackgroundColor: "#e1d7ff",
             botTitle: "Retail Bot",
@@ -40,7 +40,7 @@
             botResponseDelay: "",
             chatHeaderCss: {
               textColor: "#4c1d95",
-              backgroundColor: "#a78bfa",
+              backgroundColor: "#ebbf1e",
               enableBotAvatarBorder: true,
             },
             chatHeaderTextColor: "#4c1d95",

@@ -19,16 +19,17 @@ export const Button = styled.button`
   border-color: ${(props) => props.borderColor};
   border-style: solid;
   background-color: ${(props) => props.backgroundColor};
+  hover-border-color: ${(props) => props.hoverBorderColor};
   color: ${(props) => props.color};
 
   &:hover {
     background-color: ${(props) =>
-      props.enableHover ? props.hoverBackgroundColor : "none"};
+    props.enableHover ? props.hoverBackgroundColor : "none"};
     color: ${(props) => (props.enableHover ? props.color : "none")};
     border: ${(props) =>
-      props.enableHover
-        ? `${props.hoverborderWidth} solid ${props.borderColor}`
-        : "none"};
+    props.enableHover
+      ? `${props.hoverborderWidth} solid ${props.hoverBorderColor}`
+      : "none"};
   }
 `;
 
@@ -62,6 +63,7 @@ export const Buttons = ({ buttons, index, showBotAvatar, ts, callback }) => {
               borderColor={buttonsCss.borderColor}
               enableHover={buttonsCss.enableHover}
               hoverBackgroundColor={buttonsCss.hoverBackgroundColor}
+              hoverBorderColor={buttonsCss.hoverBorderColor}
               onClick={async (e) => {
                 e.preventDefault();
                 if (callback) {
