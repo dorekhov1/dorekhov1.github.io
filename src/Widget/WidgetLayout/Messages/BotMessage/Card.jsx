@@ -3,15 +3,17 @@ import { MardownText, formattedTs } from "../utils";
 import AppContext from "../../../AppContext";
 import { useContext } from "react";
 
-export const TextMessage = ({
+export const Card = ({
+  imageUrl,
   text,
   startsSequence,
   endsSequence,
   showBotAvatar,
   ts,
 }) => {
-  const theme = useContext(AppContext);
-  const { botAvatar, botMsgColor, botMsgBackgroundColor } = theme;
+  const appContext = useContext(AppContext);
+
+  const { botAvatar, botMsgColor, botMsgBackgroundColor } = appContext;
   const position = [
     "message",
     `${startsSequence ? "start" : ""}`,
@@ -42,22 +44,30 @@ export const TextMessage = ({
     <div className="flex space-x-1">
       <div className={`flex w-5 items-end`}>
         <img
-          className={`h-5 w-5  rounded-full ${showBotAvatar ? "" : "hidden"}`}
+          className={`h-5 w-5 rounded-full ${showBotAvatar ? "" : "hidden"}`}
           src={botAvatar}
-          alt="Bot Logo"
+          alt="BotAvatar"
         />
       </div>
+
       <div className="flex min-w-[10%] max-w-[80%] flex-col space-x-2">
         <div
-          className={`w-fit text-sm ${borderStyle}  whitespace-pre-line  break-words px-[15px] py-[8px]`}
+          className={`w-fit text-sm ${borderStyle}      `}
           style={{
             color: botMsgColor,
             backgroundColor: botMsgBackgroundColor,
-            maxWidth: "100%",
           }}
           dir="auto"
         >
-          <MardownText text={text} />
+          <img className="rounded-t-lg" src={imageUrl} alt="imgAlt" />
+
+          <div
+            className={`w-fit text-sm ${borderStyle}  whitespace-pre-line  break-words   px-[15px] py-[8px]`}
+            style={{ maxWidth: "100%" }}
+            dir="auto"
+          >
+            <MardownText text={text} />
+          </div>
         </div>
         {showBotAvatar && (
           <div className="text-[10px] italic  text-gray-500">

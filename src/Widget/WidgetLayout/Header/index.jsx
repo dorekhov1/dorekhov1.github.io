@@ -17,13 +17,13 @@ import { Icon } from "./Icons";
 
 const dropdownMenu = [
   {
-    title: "Restart",
+    title: "Начать заново",
   },
   {
-    title: "Clear Chat",
+    title: "Очистить чат",
   },
   {
-    title: "Close",
+    title: "Закрыть",
   },
 ];
 
@@ -39,7 +39,7 @@ export const Header = () => {
     userId,
     metadata,
   } = appContext;
-  
+
   const { textColor, backgroundColor, enableBotAvatarBorder } = chatHeaderCss;
   const [showDropdown, setShowDropdown] = useState(false);
   const dropdownRef = useDetectClickOutside({
@@ -78,7 +78,7 @@ export const Header = () => {
       >
         <div
           className="shrink-0 rounded-full border-[1px]  p-2"
-          style={{ borderColor: textColor, borderWidth: enableBotAvatarBorder }}
+          style={{ borderColor: textColor, borderWidth: 0 }}
         >
           <img className="h-12 w-12" src={botAvatar} alt="Bot Logo" />
         </div>
@@ -118,9 +118,9 @@ export const Header = () => {
                   key={idx}
                   className="flex hover:opacity-70"
                   onClick={() => {
-                    if (title === "Close") {
+                    if (title === "Закрыть") {
                       handleCloseButton();
-                    } else if (title === "Clear Chat") {
+                    } else if (title === "Очистить чат") {
                       handleClearChatButton();
                     } else {
                       handleRestartButton();

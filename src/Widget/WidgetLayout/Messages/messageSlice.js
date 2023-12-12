@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+
 import { getBotResponse } from "../../../utils/helpers";
 
 export const fetchBotResponse = createAsyncThunk(
@@ -22,7 +23,7 @@ const initialState = {
   messages: [],
   botTyping: false,
   userTyping: true,
-  userTypingPlaceholder: "Type your message here...",
+  userTypingPlaceholder: "Наберите ваше сообщение...",
   userGreeted: false,
 };
 export const messagesSlice = createSlice({
@@ -66,8 +67,8 @@ export const messagesSlice = createSlice({
     toggleBotTyping: (state, action) => {
       state.botTyping = action.payload;
       state.userTypingPlaceholder = action.payload
-        ? "Please wait for bot response..."
-        : "Type your message here...";
+        ? "Пожалуйста, подождите ответ..."
+        : "Наберите ваше сообщение...";
     },
     setUserTypingPlaceholder: (state, action) => {
       state.userTypingPlaceholder = action.payload;
@@ -80,9 +81,21 @@ export const messagesSlice = createSlice({
     builder.addCase(fetchBotResponse.fulfilled, (state, action) => {
       state.botTyping = false;
       state.userTyping = true;
-      state.userTypingPlaceholder = "Type your message here...";
+      state.userTypingPlaceholder = "Наберите ваше сообщение...";
       const messages = action.payload;
-      if (messages.length > 0) {
+
+      // messageType: card
+      // NOTE: bad implementation, need to be fixed on  the backend to return a card object  instead of 2 messages
+      if (messages.length == 2 && messages[0]?.text && messages[1]?.image) {
+        console.log("card message");
+        state.messages.push({
+          text: messages[0].text,
+          src: messages[1].image,
+          sender: "BOT",
+          type: "card",
+          ts: new Date(),
+        });
+      } else if (messages.length > 0) {
         for (let index = 0; index < messages.length; index += 1) {
           const message = messages[index];
           // messageType: text
@@ -120,7 +133,7 @@ export const messagesSlice = createSlice({
         }
       } else {
         state.messages.push({
-          text: "Unfortunately, I'm having some problem 😅. I would appreciate it if you could try again later",
+          text: "К сожалению, у меня произошла ошибка 😅. Я буду очень рад, если вы попробуйте ещё раз чуть позже.",
           sender: "BOT",
           type: "text",
           ts: new Date(),
