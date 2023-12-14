@@ -8,6 +8,17 @@ import { Header } from "./Header";
 import { Keypad } from "./Keypad";
 import { Launcher } from "./Launcher";
 import { Messages } from "./Messages";
+import { v4 as uuidv4 } from 'uuid';
+
+function getSessionId() {
+  let sessionId = sessionStorage.getItem('sessionId');
+  if (!sessionId) {
+    sessionId = uuidv4();
+    sessionStorage.setItem('sessionId', sessionId);
+  }
+  return sessionId;
+}
+
 export const WidgetLayout = (props) => {
   const dispatch = useDispatch();
   let { toggleWidget, userId: _userId } = useSelector(
@@ -16,18 +27,24 @@ export const WidgetLayout = (props) => {
   let { userId, embedded } = props;
   console.log(embedded);
   let userIdRef = useRef(_userId);
-  useEffect(() => {
-    if (userId) {
-      userIdRef.current = userId;
-    } else {
-      if (!userIdRef.current) {
-        userIdRef.current = nanoid();
-        console.log(userIdRef.current);
-        dispatch(setUserId(userIdRef.current));
-      }
-    }
-  }, [dispatch, embedded, props.userId, toggleWidget, userId]);
+  // useEffect(() => {
+  //   if (userId) {
+  //     userIdRef.current = userId;
+  //   } else {
+  //     if (!userIdRef.current) {
+  //       userIdRef.current = nanoid();
+  //       console.log(userIdRef.current);
+  //       dispatch(setUserId(userIdRef.current));
+  //     }
+  //   }
+  // }, [dispatch, embedded, props.userId, toggleWidget, userId]);
 
+  useEffect(() => {
+    if (!userIdRef.current) {
+      userIdRef.current = getSessionId();
+      dispatch(setUserId(userIdRef.current));
+    }
+  }, [dispatch]);
   if (embedded) {
     return (
       <AppContext.Provider value={{ userId: userIdRef.current, ...props }}>

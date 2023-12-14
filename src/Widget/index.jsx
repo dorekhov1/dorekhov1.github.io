@@ -49,7 +49,6 @@ Widget.prototype = {
 
 Widget.defaultProps = {
   rasaServerUrl: "https://chat.choice.shopping/webhooks/rest/webhook",
-  userId: "demo",
   initialPayload: "/greet",
   metadata: {},
   botAvatar: botAvatar,
