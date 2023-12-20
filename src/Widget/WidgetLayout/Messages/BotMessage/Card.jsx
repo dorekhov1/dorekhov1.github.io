@@ -59,7 +59,18 @@ export const Card = ({
           }}
           dir="auto"
         >
-          <img className="rounded-t-lg" src={imageUrl} alt="imgAlt" />
+          {/* <img className="rounded-t-lg" src={imageUrl} alt="imgAlt" style={{ maxWidth: '300px', maxHeight: '300px' }} /> */}
+          <div
+            className="flex justify-center" // This will center the image horizontally
+            style={{ maxWidth: "100%" }} // Optional, ensures the container doesn't exceed its parent width
+          >
+            <img
+              className="rounded-t-lg"
+              src={imageUrl}
+              alt="imgAlt"
+              style={{ maxWidth: '300px', maxHeight: '300px' }} // Set your desired dimensions
+            />
+          </div>
 
           <div
             className={`w-fit text-sm ${borderStyle}  whitespace-pre-line  break-words   px-[15px] py-[8px]`}

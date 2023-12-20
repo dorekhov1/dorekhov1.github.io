@@ -84,20 +84,28 @@ export const messagesSlice = createSlice({
       state.userTypingPlaceholder = "Наберите ваше сообщение...";
       const messages = action.payload;
 
-      // messageType: card
-      // NOTE: bad implementation, need to be fixed on  the backend to return a card object  instead of 2 messages
-      if (messages.length == 2 && messages[0]?.text && messages[1]?.image) {
-        console.log("card message");
-        state.messages.push({
-          text: messages[0].text,
-          src: messages[1].image,
-          sender: "BOT",
-          type: "card",
-          ts: new Date(),
-        });
-      } else if (messages.length > 0) {
+      if (messages.length > 0) {
         for (let index = 0; index < messages.length; index += 1) {
           const message = messages[index];
+
+          // messageType: card
+          if (message?.custom?.product_card) {
+            const card = message.custom.product_card;
+            const formattedPrice = new Intl.NumberFormat('ru-RU', {
+              style: 'currency',
+              currency: 'RUB',
+              maximumFractionDigits: 2
+            }).format(card.product_price);
+            const text = `[**${card.product_name}**](${card.url})\nЦена: ${formattedPrice}\nОписание: ${card.product_description}\n \n[*Ссылка на товар*](${card.url})`;
+            state.messages.push({
+              text: text,
+              src: card.photo_url,
+              sender: "BOT",
+              type: "card",
+              ts: new Date(),
+            });
+          }
+
           // messageType: text
           if (message?.text) {
             state.messages.push({
